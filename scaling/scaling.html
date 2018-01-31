@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.min.js"></script>
+    <script src="https://d3js.org/d3-axis.v1.js"></script>
+
+    <style>
+        svg {
+            border: 1px solid #000;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="scaling"></div>
+</body>
+<script>
+
+    function createGraph() {
+        const graphData = [10, 500, 450, 65, 854, 120, 1200],
+            w = 800,
+            h = 600;
+        const scaling = d3.scaleLinear()
+            .domain([0, 1200])
+            .range([0, w]);
+
+        const axis = d3.axisLeft();
+        axis.ticks(15)
+            .scale(scaling)
+
+        const canvas = d3
+            .select(".scaling")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h)
+            .append("g")
+            .attr("transform","translate(30,5)")
+
+        canvas.selectAll("rect")
+            .data(graphData)
+            .enter()
+            .append("rect")
+            .attr("fill", "green")
+            .attr("width", function (d, i) { return scaling(d); })
+            .attr("height", 20)
+            .attr("y", function (d, i) { return i * 25 })
+
+        canvas
+            .append("g")
+            .call(axis)
+    }
+
+    createGraph()
+
+
+</script>
+
+</html>

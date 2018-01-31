@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.min.js"></script>
+</head>
+
+<body>
+    <div class="importContainer"></div>
+
+
+    <script>
+
+        d3.json('./data.json', function (data) {
+            console.log(data)
+            const w      = 800,
+                  h      = 600, 
+                  canvas = d3
+                .select(".importContainer")
+                .append("svg")
+                .attr("width", 800)
+                .attr("height", 600)
+
+            const scaling = d3.scaleLinear()
+                .domain([0, 1200])
+                .range([0 , w])
+
+            const rect = canvas
+                .selectAll("rect")
+                .data(data)
+                .enter()
+                .append("rect")
+                .attr("width", function (d, i) { return scaling(d.rank * 10 )})
+                .attr("height", 50)
+                .attr("y", function (d, i) { return i * 80 })
+                .attr("fill", "green")
+
+            const text = canvas.selectAll("text")
+                .data(data)
+                .enter()
+                .append("text")
+                .text(function (d, i) { return `${d.name} rank: ${d.rank}` })
+                .attr("x", 5)
+                .attr("y", function (d, i) { return i * 80 + 25 })
+                .attr("fill", "#000")
+        })
+
+
+
+
+
+    </script>
+</body>
+
+</html>

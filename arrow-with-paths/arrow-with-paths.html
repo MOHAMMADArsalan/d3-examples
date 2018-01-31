@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.min.js"></script>
+
+</head>
+
+<body>
+    <div class="pathContainer"></div>
+
+    <script>
+
+        function createArrow() {
+            const data = [
+                { x: 10,  y: 20 },
+                { x: 100, y: 100 },
+                { x: 10,  y: 200 }
+            ]
+            const canvas = d3
+                .select(".pathContainer")
+                .append("svg")
+                .attr("width", 500)
+                .attr("height", 500)
+
+            const group = canvas
+                .append("g")
+                .attr("transform", "translate(100,100)")
+
+            const line = d3.line()
+                .x(function (d) { return d.x })
+                .y(function (d) { return d.y })
+                
+            const path = group
+                .selectAll("path")
+                .data([data])
+                .enter()
+                .append("path")
+                .attr("d", line)
+                .attr("fill", "none")
+                .attr("stroke", "red")
+                .attr("stroke-width", 5)
+
+        }
+
+        createArrow()
+    </script>
+</body>
+
+</html>

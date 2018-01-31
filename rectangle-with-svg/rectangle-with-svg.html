@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.min.js"></script>
+</head>
+
+<body>
+    <script>
+        function createRectangle({ width, height, fill }) {
+            const canvas = d3
+                .select("body")
+                .append("svg")
+                .attr("width", 500)
+                .attr("height", 500);
+
+            const rect = canvas
+                .append("rect")
+                .attr("width", width)
+                .attr("height", height)
+                .attr("fill", fill)
+        }
+
+        createRectangle(
+            { width: 400, height: 200, fill: 'blue' }
+        )
+
+
+    </script>
+</body>
+
+</html>
